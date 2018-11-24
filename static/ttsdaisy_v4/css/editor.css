@@ -129,4 +129,6 @@ html, body {
    overflow: auto;
 }
 
-
+.ace_purple_text {
+  color: green;
+}

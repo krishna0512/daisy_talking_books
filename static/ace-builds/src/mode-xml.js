@@ -125,6 +125,10 @@ var XmlHighlightRules = function(normalize) {
         }],
 
         attributes: [{
+            token: "purple_text",
+            regex: "vandna|chaturvedi",
+            caseInsensitive: true
+        },{
             token : "entity.other.attribute-name.xml",
             regex : tagRegex
         }, {
