@@ -1,0 +1,11 @@
+Documentation
+- start error handling
+- start logging
+- start documenting
+- start creating demo video content
+
+Design
+- use utils file for commonly used functions
+- separate out templates as per application
+- use validators file to validate file content
+- start writing test cases

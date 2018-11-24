@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="container-fluid" id="main-div">
+  <p></p>
+    <div class="row">
+        <div class="col-lg-2" id="col1">
+            <div class="row inner_row" style="height: 6%">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">TAGS
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu ul_tags">
+                        <li class="ul_tags"><a href="#">dtbook</a></li>
+                        <li class="ul_tags"><a href="#">head</a></li>
+                        <li class="ul_tags"><a href="#">meta</a></li>
+                        <li class="ul_tags"><a href="#">level1</a></li>
+                        <li class="ul_tags"><a href="#">doctitle</a></li>
+                        <li class="ul_tags"><a href="#">docauthor</a></li>
+                        <li class="ul_tags"><a href="#">frontmatter</a></li>
+                        <li class="ul_tags"><a href="#">200d</a></li>
+                        <li class="ul_tags"><a href="#">pagenum</a></li>
+                        <li class="ul_tags"><a href="#">h1</a></li>
+                        <li class="ul_tags"><a href="#">p</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p></p>
+            <div class="row inner_row">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">ATTRIBUTES
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li class="ul_attribs"><a href="#">id</a></li>
+                        <li class="ul_attribs"><a href="#">page</a></li>
+                        <li class="ul_attribs"><a href="#">xmlns</a></li>
+                        <li class="ul_attribs"><a href="#">content</a></li>
+                        <li class="ul_attribs"><a href="#">name</a></li>
+                        <li class="ul_attribs"><a href="#">version</a></li>
+                        <li class="ul_attribs"><a href="#">class</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p></p>
+            <div class="inner_row2">
+              <button type="button" id="convert" title="Convert the xml to daisy book using daisy pipeline. " name="button"
+                  class="btn btn-primary">Convert to Audio
+              </button>
+            </div>
+        </div>
+        <div class="col-lg-5" id="col2" style="padding-right:20px; border-right: 5px solid #ccc;">
+            <div id="editor"></div>
+        </div>
+        <div class="col-lg-5" id="col3">
+            <div id="imageUpload">
+              <img src="" id="image_drom_db" alt="No image.">
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10"></div>
+        <div class="col-lg-1">
+          <input type="hidden" name="bookid" value="{{ bookid }}" id="hiddenBookId">
+          <input type="hidden" name="bookname" value="{{ title }}" id="hiddenBookName">
+        </div>
+    </div>
+
+    <div id="loader">
+    </div>
+    {% block scripts %}
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- jQuery !-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+    <!-- jQuery UI !-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <script src="{% static "ace-builds/src-noconflict/ace.js"%}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "ttsdaisy_v4/js/single_page_editor.js"%}" type="text/javascript" ></script>
+    <script src="{% static "ttsdaisy_v4/js/FileSaver.js"%}" type="text/javascript" ></script>
+
+<!-- http://flaviusim.com/blog/AJAX-Autocomplete-Search-with-Django-and-jQuery/ -->
+<!-- https://sweetalert.js.org/guides/ -->
+    {% endblock %}
+</div>
+{% endblock %}

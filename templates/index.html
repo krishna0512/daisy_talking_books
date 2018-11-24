@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-3">Welcome to Daisy App.</h1>
+        <p class="lead">Login or Sign-up for free to get started. </p>
+        <p><a class="btn btn-lg btn-success" href="{% url 'accounts:signup' %}" role="button">Sign up</a></p>
+    </div>
+
+    <div class="row marketing">
+      <div class="col-lg-6">
+      </div>
+
+      <div class="col-lg-6">
+      </div>
+    </div>
+    {% block scripts %}
+    <link rel="stylesheet" href="{% static 'ttsdaisy_v4/css/index.css'%}">
+    {% endblock %}
+{% endblock %}

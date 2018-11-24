@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="container-fluid" id="main-div">
+  <p></p>
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10" id="col2" style="padding-right:20px; border-right: 5px solid #ccc;">
+        <div id="editor"></div>
+      </div>
+      <div class="col-lg-1"></div>
+    </div>
+    <p></p>
+    <div class="row" style="height: 15%">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-1">
+              <button type="button" id="convert" title="Convert the xml to daisy book using daisy pipeline. " name="button"
+                  class="btn btn-primary">Convert
+              </button>
+              
+            </div>
+            <!-- <div class="col-lg-1">
+                <button type="button" id="go_to_edit" title="back to edit" name="button"
+                  class="btn btn-primary" value="1">back to edit
+            </button> -->
+            </div>
+            <div class="col-lg-7"></div>
+        </div>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-11">
+          <input type="hidden" name="bookid" value="{{ bookid }}" id="hiddenBookId">
+          <input type="hidden" name="bookname" value="{{ title }}" id="hiddenBookName">
+          <input type="hidden" name="pagenumber" value="{{ page_number }}" id="hiddenPageNumber">
+          <input type="hidden" name="is_final_page" value="{{ is_final_page }}" id="isFinalPage">
+        </div>
+    </div>
+
+    <div id="loader">
+    </div>
+    {% block scripts %}
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+    var dict = "{% static "ttsdaisy_v4/dicts/en_US.dic" %}"
+    var aff = "{% static "ttsdaisy_v4/dicts/en_US.aff" %}"
+    </script>
+    <!-- jQuery !-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+    <!-- jQuery UI !-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <script src="{% static "ace-builds/src-noconflict/ace.js"%}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "ttsdaisy_v4/js/editor.js"%}" type="text/javascript" ></script>
+    <script src="{% static "ttsdaisy_v4/js/FileSaver.js"%}" type="text/javascript" ></script>
+    <script src="{% static "ttsdaisy_v4/js/typo.js"%}" type="text/javascript" ></script>
+    <script src="{% static "ttsdaisy_v4/js/spellcheck_ace.js"%}" type="text/javascript" ></script>
+
+<!-- http://flaviusim.com/blog/AJAX-Autocomplete-Search-with-Django-and-jQuery/ -->
+<!-- https://sweetalert.js.org/guides/ -->
+    {% endblock %}
+</div>
+{% endblock %}

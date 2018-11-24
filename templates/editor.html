@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="container-fluid" id="main-div">
+  <p></p>
+    <div class="row">
+      {% if all_processed == 0 %}
+        <div class="col-lg-2" id="col1">
+            <div class="row inner_row" style="height: 6%">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">TAGS
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu ul_tags">
+                        <li class="ul_tags"><a href="#">dtbook</a></li>
+                        <li class="ul_tags"><a href="#">head</a></li>
+                        <li class="ul_tags"><a href="#">meta</a></li>
+                        <li class="ul_tags"><a href="#">level1</a></li>
+                        <li class="ul_tags"><a href="#">doctitle</a></li>
+                        <li class="ul_tags"><a href="#">docauthor</a></li>
+                        <li class="ul_tags"><a href="#">frontmatter</a></li>
+                        <li class="ul_tags"><a href="#">200d</a></li>
+                        <li class="ul_tags"><a href="#">pagenum</a></li>
+                        <li class="ul_tags"><a href="#">h1</a></li>
+                        <li class="ul_tags"><a href="#">p</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p></p>
+            <div class="row inner_row">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">ATTRIBUTES
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li class="ul_attribs"><a href="#">id</a></li>
+                        <li class="ul_attribs"><a href="#">page</a></li>
+                        <li class="ul_attribs"><a href="#">xmlns</a></li>
+                        <li class="ul_attribs"><a href="#">content</a></li>
+                        <li class="ul_attribs"><a href="#">name</a></li>
+                        <li class="ul_attribs"><a href="#">version</a></li>
+                        <li class="ul_attribs"><a href="#">class</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row inner_row">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">PAGE
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu myDropDown">
+                        {% for page in pages %} 
+                          <li class="unprocessed_pages"><a class="dropdown-page-number" href="#">{{ page.page_number }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5" id="col2" style="padding-right:20px; border-right: 5px solid #ccc;">
+            <div id="editor"></div>
+        </div>
+        <div class="col-lg-5" id="col3">
+            <div id="imageUpload">
+              <img src="" id="image_drom_db" alt="No image.">
+            </div>
+        </div>
+      {% else %}
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10" id="col2" style="padding-right:20px; border-right: 5px solid #ccc;">
+        <div id="editor"></div>
+      </div>
+      <div class="col-lg-1"></div>
+      {% endif %}
+    </div>
+    <p></p>
+    <div class="row" style="height: 15%">
+      {% if page_position != 'last' and all_processed == 0 %}
+        <div class="col-lg-4">
+            <button class="btn btn-primary" title="Fresh OCR output" id="fresh OCR" type="button" name="button">Reset OCR</button>
+        </div> 
+        <div class="col-lg-1"> 
+        <div class="c-lg-1">
+            <button class="btn btn-primary" title="Save the xml output. "
+                id="savePage" type="button" name="button">Save Tagged Text</button>
+        </div>
+        <div class="col-lg-7"></div>
+        {% elif page_position == 'last' and all_processed == 0 %}
+        <div class="col-lg-4"></div>
+        <div class="col-lg-1">
+          <button type="button" id="viewFullXml" title="View and verify full daisy xml. " name="button"
+              class="btn btn-primary">View full XML
+          </button>
+        </div>
+        <div class="col-lg-7"></div>
+        {% elif all_processed == 1 %}
+            <div class="col-lg-4"></div>
+            <div class="col-lg-1">
+              <button type="button" id="convert" title="Convert the xml to daisy book using daisy pipeline. " name="button"
+                  class="btn btn-primary">Convert
+              </button>
+              
+            </div>
+            <div class="col-lg-1">
+                <button type="button" id="go_to_edit" title="back to edit" name="button"
+                  class="btn btn-primary" value="1">back to edit
+            </button>
+            </div>
+            <div class="col-lg-7"></div>
+        {% endif %}
+        </div>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-11">
+          <input type="hidden" name="bookid" value="{{ bookid }}" id="hiddenBookId">
+          <input type="hidden" name="bookname" value="{{ title }}" id="hiddenBookName">
+          <input type="hidden" name="pagenumber" value="{{ page_number }}" id="hiddenPageNumber">
+          <input type="hidden" name="is_final_page" value="{{ is_final_page }}" id="isFinalPage">
+        </div>
+    </div>
+
+    <div id="loader">
+    </div>
+    {% block scripts %}
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+    var dict = "{% static "ttsdaisy_v4/dicts/en_US.dic" %}"
+    var aff = "{% static "ttsdaisy_v4/dicts/en_US.aff" %}"
+    </script>
+    <!-- jQuery !-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+    <!-- jQuery UI !-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <script src="{% static "ace-builds/src-noconflict/ace.js"%}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "ttsdaisy_v4/js/editor.js"%}" type="text/javascript" ></script>
+    <script src="{% static "ttsdaisy_v4/js/FileSaver.js"%}" type="text/javascript" ></script>
+    <script src="{% static "ttsdaisy_v4/js/typo.js"%}" type="text/javascript" ></script>
+    <script src="{% static "ttsdaisy_v4/js/spellcheck_ace.js"%}" type="text/javascript" ></script>
+
+<!-- http://flaviusim.com/blog/AJAX-Autocomplete-Search-with-Django-and-jQuery/ -->
+<!-- https://sweetalert.js.org/guides/ -->
+    {% endblock %}
+</div>
+{% endblock %}

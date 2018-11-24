@@ -1,0 +1,16 @@
+{% extends 'user_home.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="">
+    <ul>
+      <li><b>Title</b>: {{ book.title }}</li>
+      <li><b>Author</b>: {{ book.author }}</li>
+      <li><b>Language</b>: {{ book.language }}</li>
+      <li><b>Tags  </b>: {{ book.tags.all|join:", " }}</li>
+      <li><b>Details</b>: {{ book.details }}</li>
+      <li><b>Creation Date</b>: {{ book.created }}</li>
+      <li><b>Last Accessed</b>: {{ book.modified }}</li>
+    </ul>
+  </div>
+{% endblock %}
