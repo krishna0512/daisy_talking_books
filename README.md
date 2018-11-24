@@ -51,4 +51,9 @@ Note: The above address is configurable in case of production settings. Use the 
 ## References:
 https://medium.com/@lucas63/installing-tesseract-3-04-in-ubuntu-14-04-1dae8b748a32  
 https://gist.github.com/rajmani1995/cae8a16056e44bd901a6d17d8f1a7fbf  
-https://stackoverflow.com/questions/11094718/error-command-gcc-failed-with-exit-status-1-while-installing-eventlet  
+https://stackoverflow.com/questions/11094718/error-command-gcc-failed-with-exit-status-1-while-installing-eventlet 
+
+##checklist
+- [x] 1
+- [ ] 2
+- [ ] 3
