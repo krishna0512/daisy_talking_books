@@ -57,4 +57,3 @@ https://stackoverflow.com/questions/11094718/error-command-gcc-failed-with-exit-
 - [x] 1
 - [ ] 2
 - [ ] 3
-- [ ] 4
