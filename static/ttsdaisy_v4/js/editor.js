@@ -241,7 +241,6 @@ function get_data_through_api(bookid){
 
 function run_pipeline(bookname, xmldata, bookid) {
   console.log("running the pipeline now.. hold tight.. ");
-  debugger;
   url = "http://localhost:5000/run_daisy_pipeline/";
   data = {'bookname': bookname, 'xmldata': xmldata, 'bookid': bookid};
   $.ajax({
@@ -378,18 +377,41 @@ $("#viewFullXml").click(function(){
   load_full_xml_to_editor("save");
 });
 
-$("#convert").click(function() {
+// $("#convert").click(function() {
+//   var bookid = get_bookid();
+//   var bookname = get_bookname();
+//   var data = get_data();
+
+//   console.log("bookid: " + bookid );
+//   console.log("bookname: " + bookname);
+
+//   console.log("Running the pipeline.");
+//   run_pipeline(bookname, data, bookid);
+
+//   console.log("pipeline successfully run, check the audio book back in sometime. ");
+//   window.location = "/user_home/";
+// });
+
+$("#dwnloadtts").click(function(){
   var bookid = get_bookid();
   var bookname = get_bookname();
   var data = get_data();
 
-  console.log("bookid: " + bookid );
-  console.log("bookname: " + bookname);
+  url = "/api/generate_tts/";
+  data = {'bookid': bookid, 'xmldata': xmldata};
+  $.ajax({
+      type:"POST",
+      url: url,
+      data: data,
+      async: true,
+      success: function (response){
+        response = JSON.parse(response);
+        window.location = response.url
+      },
+      error: function(errorThrown){
+        swal("OOPS!","Looks like there was an error: " + errorThrown, "error");
+      },
+      dataType: "text"
+    });
 
-  console.log("Running the pipeline.");
-  run_pipeline(bookname, data, bookid);
-
-  console.log("pipeline successfully run, check the audio book back in sometime. ");
-  window.location = "/user_home/";
 });
-

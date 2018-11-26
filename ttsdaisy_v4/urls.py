@@ -37,6 +37,8 @@ urlpatterns = [
     url(r"^api/mark_page_as_processed/", views.mark_page_as_processed, name="mark_page_as_processed"),
     url(r"^api/load_full_xml_to_editor/", views.load_full_xml_to_editor, name="load_full_xml_to_editor"),
     url(r"^api/update_daisy_xml/", views.update_daisy_xml, name="update_daisy_xml"),
+    url(r"^api/generate_tts/", views.generate_tts, name="generate_tts"),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

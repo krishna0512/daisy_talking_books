@@ -14,6 +14,12 @@ from urllib.parse import urlencode
 from httplib2 import Http
 from . import settings
 import time, datetime, logging, sys
+
+#for text to speech using marytts
+from tts.daisy import TTSEngine,DaisyBook
+from tts.audio import espeaktts, marytts
+from tts.settings import output_folder, yaml_config
+
 logger = logging.getLogger(__name__)
 LOGGING = {
     'handlers': {
@@ -558,6 +564,19 @@ def mark_page_as_processed(request):
     print("The page '{}' has been saved successfully. ".format(page_number))
     mimetype = 'application/json'
     return HttpResponse(json.dumps({"url": "/edit/?bookid="+book_id}), mimetype)
+
+def generate_tts(request):
+   book_id = request.POST.get('bookid', '') 
+   title = get_bookname_from_id(bookid)
+   xml_data = request.POST.get('xmldata', '')
+   output_path = settings.MEDIA_ROOT + '/archive/'+ title +"/"
+   with open(output_path+title + ".xml" , 'w') as xml_file:
+       xml_file.write(xml_data)
+
+   tts = TTSEngine(marytts)
+   dtd = daisy.DaisyBook(yaml_config, output_path, tts, Book)
+   dtd.build()
+   return "Succeed !!"
 
 # References
 '''
