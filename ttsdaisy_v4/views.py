@@ -564,17 +564,19 @@ def mark_page_as_processed(request):
     print("The page '{}' has been saved successfully. ".format(page_number))
     mimetype = 'application/json'
     return HttpResponse(json.dumps({"url": "/edit/?bookid="+book_id}), mimetype)
-
+@csrf_exempt
 def generate_tts(request):
-   book_id = request.POST.get('bookid', '') 
+   import pdb;pdb.set_trace()
+   bookid = request.POST.get('bookid', '') 
    title = get_bookname_from_id(bookid)
    xml_data = request.POST.get('xmldata', '')
-   output_path = settings.MEDIA_ROOT + '/archive/'+ title +"/"
-   with open(output_path+title + ".xml" , 'w') as xml_file:
+   file_path = settings.MEDIA_ROOT + '/archive/'+ title +".xml"
+   tts_out = settings.MEDIA_ROOT + '/tts_out/'
+   with open(file_path , 'w+') as xml_file:
        xml_file.write(xml_data)
 
    tts = TTSEngine(marytts)
-   dtd = daisy.DaisyBook(yaml_config, output_path, tts, Book)
+   dtd = DaisyBook(yaml_config, tts_out, tts, file_path)
    dtd.build()
    return "Succeed !!"
 

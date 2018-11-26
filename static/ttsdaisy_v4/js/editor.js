@@ -398,7 +398,7 @@ $("#dwnloadtts").click(function(){
   var data = get_data();
 
   url = "/api/generate_tts/";
-  data = {'bookid': bookid, 'xmldata': xmldata};
+  data = {'bookid': bookid, 'xmldata': data};
   $.ajax({
       type:"POST",
       url: url,

@@ -140,9 +140,9 @@ class DaisyBook(object):
         self.ncc_file.write(self.output_folder + self.folder_name + "ncc.html")
 
 
-# if __name__ == "__main__":
-#     from settings import output_folder, yaml_config
-#     Book = "test.xml"
-#     tts = TTSEngine(marytts)
-#     Dtb = DaisyBook(yaml_config, output_folder, tts, Book)
-#     Dtb.build()
+if __name__ == "__main__":
+    from settings import output_folder, yaml_config
+    Book = "/home/tushar/code/general/ttsdaisy_v4/media/archive/ARTICLE_ENGLISH_ONE.xml"
+    tts = TTSEngine(marytts)
+    Dtb = DaisyBook(yaml_config, "/home/tushar/code/general/ttsdaisy_v4/media/tts_out/", tts, Book)
+    Dtb.build()
