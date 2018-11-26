@@ -241,6 +241,7 @@ function get_data_through_api(bookid){
 
 function run_pipeline(bookname, xmldata, bookid) {
   console.log("running the pipeline now.. hold tight.. ");
+  debugger;
   url = "http://localhost:5000/run_daisy_pipeline/";
   data = {'bookname': bookname, 'xmldata': xmldata, 'bookid': bookid};
   $.ajax({
