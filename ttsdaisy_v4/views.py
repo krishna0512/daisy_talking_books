@@ -566,7 +566,7 @@ def mark_page_as_processed(request):
     return HttpResponse(json.dumps({"url": "/edit/?bookid="+book_id}), mimetype)
 @csrf_exempt
 def generate_tts(request):
-   import pdb;pdb.set_trace()
+   #import pdb;pdb.set_trace()
    bookid = request.POST.get('bookid', '') 
    title = get_bookname_from_id(bookid)
    xml_data = request.POST.get('xmldata', '')
