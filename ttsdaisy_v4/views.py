@@ -474,7 +474,7 @@ def load_full_xml_to_editor(request):
             <bodymatter id="bodymatter_0239">
             <level1>
             
-        """.format(bookname, bookname, page_number, page_number)
+        """.format(bookname, bookname)
     
     xml_preloaded_last_tags = """
     </level1>

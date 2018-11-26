@@ -21,8 +21,8 @@
     					<ul class="nav justify-content-end">
     						{% if user.is_authenticated %}
                       <li><a href="{% url 'user_home' %}" class="btn btn-simple">Home</a></li>
-                      <li><a href="{% url 'upload:add_book' %}" class="btn btn-simple">Large Document</a></li>
-                      <li><a href="{% url 'upload:add_single_page' %}" class="btn btn-simple">One Page Document</a></li>
+                      <li><a href="{% url 'upload:add_book' %}" class="btn btn-simple">Upload Large Document</a></li>
+                      <li><a href="{% url 'upload:add_single_page' %}" class="btn btn-simple">Single Page Document</a></li>
                       <li><a href="{% url 'view_library' %}" class="btn btn-simple">My Library</a></li>
                       <li><a href="{% url 'accounts:logout' %}" class="btn btn-simple">Log out</a></li>
     						{% else %}

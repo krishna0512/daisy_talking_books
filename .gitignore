@@ -1,0 +1,11 @@
+
+upload/__pycache__/
+
+ttsdaisy_v4/__pycache__/
+
+media/
+
+accounts/__pycache__/
+
+db.sqlite3
+*.pyc

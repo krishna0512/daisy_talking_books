@@ -2,12 +2,29 @@
 {% load bootstrap3 %}
 
 {% block content %}
-<div class="container">
-    <h1>Add Book</h1>
+    
+    <div class = "row">
+    <div class="col-md-6 offset-md-3">
+    	<h1>Add Book</h1>
+	<div class="alert alert-info" role="alert">
+
+  		<h4>Guildlnes:</h4>
+  		<ul><li>Naming convention required for Books : </li>
+  			<ul><li>Book Name: Sample_Telugu_Article (without spaces);</li>
+  			<li>Pages Name:Sample_Telugu_Article.0001.jpg </li>
+  			<li>Pages should be in .jpg format only.</li></ul>
+			<li>Compressed file format should be .zip compressed format only.</li>
+			<li>If Audio book ckeckbox is not ticked then user will be able to download only XML format of the book only.</li>
+		</ul>
+  <hr>
+</div>
+</div>
+
+	<div class="col-md-6 offset-md-3">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <input type="submit" value="Add Book" class="btn btn-default">
+        <input type="submit" value="Add Book" class="btn btn-default btn-primary">
     </form>
 </div>
 {% endblock %}

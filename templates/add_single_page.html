@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
-
 {% block content %}
-<div class="container">
-    <h1>Add Page</h1>
+    <div class="col-md-6 offset-md-3">
+    	<h1>Upload Single Page</h1>
+			<div class="alert alert-info" role="alert">
+  				<h4>Guildlnes:</h4>
+  				<ul><li>Pages should be in .jpg format only.</li></ul>
+			</div>
+	</div>
+<div class="col-md-6 offset-md-3">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <input type="submit" value="Add Single Page" class="btn btn-default">
+        <input type="submit" value="Upload Page" class="btn btn-default btn-primary">
     </form>
 </div>
 {% endblock %}
