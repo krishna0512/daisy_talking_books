@@ -283,6 +283,9 @@ def get_text_data_of_the_image(image, page_number, bookname, page_position='inte
     return j["xml"]
 
 def append_xml_data(bookid, data):
+    """
+    Book is iteratively saved here
+    """
     print("Appending data to daisy xml. ")
     book = Book.objects.get(id=bookid)
     if book.daisy_xml == '' or book.daisy_xml == None:
@@ -451,12 +454,20 @@ def load_full_xml_to_editor(request):
     bookid = request.GET.get('bookid', '')
     bookname = get_bookname_from_id(bookid)
     page_number = request.GET.get('page_number', '')
-    save_option = request.GET.get('saveOption', '')
+    
+    save_option = request.GET.get('saveOption', '') 
+    ## if save option is true means save button on 
+    #editor is pressed so save data from editor in db
+
+
+    book = Book.objects.get(id=bookid)
+    
+
 
     xml_preloaded_start_tags = """<?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE dtbook PUBLIC "-//NISO//DTD dtbook 2005-3//EN" "http://www.daisy.org/z3986/2005/dtbook-2005-3.dtd">
         <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" version="2005-3" xml:lang="ml">
-        <head>
+        <head>vdksnvkfnkjnvf tushar
             <meta name="dtb:uid" content="AUTO-UID-0239"/>
             <meta name="dt:version" content="2.0.0.0 Beta"/>
             <meta name="dc:Title" content="{}"/>
@@ -485,9 +496,13 @@ def load_full_xml_to_editor(request):
     
     context = {}
     context["all_processed"] = '1'
-    page_xml = xml_preloaded_start_tags + get_full_daisy_xml(bookid) + xml_preloaded_last_tags
-    context["daisy_xml"] = page_xml
+    whole_book_xml = xml_preloaded_start_tags + get_full_daisy_xml(bookid) + xml_preloaded_last_tags
+    # whole_book_xml =  get_full_daisy_xml(bookid) 
+
+    context["daisy_xml"] = whole_book_xml
     mimetype = 'application/json'
+    # book.daisy_xml = whole_book_xml
+    # book.save()
     return HttpResponse(json.dumps(context), mimetype)
 
 def zipdir(path, ziph):
